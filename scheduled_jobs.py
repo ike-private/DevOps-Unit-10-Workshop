@@ -44,5 +44,5 @@ def process_orders(app):
 def get_queue_of_orders_to_process():
     allOrders = get_all_orders()
     queuedOrders = filter(lambda order: order.date_processed == None, allOrders)
-    sortedQueue = sorted(queuedOrders, key= lambda order: order.date_placed)
+    sortedQueue = sorted(queuedOrders, key= lambda order: order.date_placed_local)
     return list(sortedQueue)
