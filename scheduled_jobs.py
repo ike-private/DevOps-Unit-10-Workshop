@@ -26,7 +26,7 @@ def process_orders(app):
         payload = {
             "product": order.product,
             "customer": order.customer,
-            "date": order.date_placed.isoformat(),
+            "date": order.date_placed_local.isoformat(),
         }
 
         response = requests.post(
@@ -44,5 +44,5 @@ def process_orders(app):
 def get_queue_of_orders_to_process():
     allOrders = get_all_orders()
     queuedOrders = filter(lambda order: order.date_processed == None, allOrders)
-    sortedQueue = sorted(queuedOrders, key= lambda order: order.date_placed_local)
+    sortedQueue = sorted(queuedOrders, key= lambda order: order.date_placed)
     return list(sortedQueue)
